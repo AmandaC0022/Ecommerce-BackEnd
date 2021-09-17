@@ -13,7 +13,7 @@ ProductTag.init(
       autoIncrement: true
     },
     product_id: {
-      type: DataTypes.INTEGAR,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'product',
@@ -22,7 +22,7 @@ ProductTag.init(
       } 
     },
     tag_id: {
-      type: DataTypes.INTEGAR,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'tag',
