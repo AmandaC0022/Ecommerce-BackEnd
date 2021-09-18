@@ -70,34 +70,23 @@ router.post('/', (req, res) => {
     });
 });
 
+//bug 400 Bad request error in insomnia 
 // update product
-router.put('/:id', (req, res) => {
-  // update product data
-  Product.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((product) => {
-      // find all associated tags from ProductTag
-      return ProductTag.findAll({ where: { product_id: req.params.id } });
-    })
-    .then((productTags) => {
-      // get list of current tag_ids
-      const productTagIds = productTags.map(({ tag_id }) => tag_id);
-      // create filtered list of new tag_ids
-      const newProductTags = req.body.tagIds
-        .filter((tag_id) => !productTagIds.includes(tag_id))
-        .map((tag_id) => {
-          return {
-            product_id: req.params.id,
-            tag_id,
-          };
-        });
-      // figure out which ones to remove
-      const productTagsToRemove = productTags
-        .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
-        .map(({ id }) => id);
+router.put('/:id' , async (req,res)=> {
+  try {
+    const { id } = req.params;
+    const [updated] = await Category.update(req.body, {
+        where: { id: id }
+    });
+    if (updated) {
+        const updatedCategory = await Category.findOne({ where: { id: id } });
+        return res.json({ updatedCategory });
+    }
+    throw new Error('Category not found');
+} catch (error) {
+    return res.status(500).send(error.message);
+  }
+}); 
 
 
 router.delete('/:id', async (req, res) => {
