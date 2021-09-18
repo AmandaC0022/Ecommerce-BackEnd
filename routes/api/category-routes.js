@@ -3,6 +3,7 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
+//GETS all Categories 
 router.get('/', async (req, res) => {
   try {
     const categoryData = await Category.findAll();
@@ -12,19 +13,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+//GETS specific Category by ID 
 router.get('/:id', async (req, res) => {
   try {
-    const locationData = await Location.findByPk(req.params.id, {
-      // JOIN with travellers, using the Trip through table
-      include: [{ model: Traveller, through: Trip, as: 'location_travellers' }]
+    const categoryData = await Category.findByPk(req.params.id, {
+      // Joins with the Product module
+      include: [{ model: Product }]
     });
 
-    if (!locationData) {
-      res.status(404).json({ message: 'No location found with this id!' });
+    if (!categoryData) {
+      res.status(404).json({ message: 'No category found with this id!' });
       return;
     }
 
-    res.status(200).json(locationData);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
