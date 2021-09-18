@@ -72,21 +72,32 @@ router.post('/', (req, res) => {
 
 //bug 400 Bad request error in insomnia 
 // update product
-router.put('/:id' , async (req,res)=> {
+router.put('/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const [updated] = await Category.update(req.body, {
-        where: { id: id }
+    const productData = await Product.update(
+    {
+      product_name: req.body.product_name,
+      price: req.body.price,
+      stock: req.body.stock, 
+      tagIds: req.body.tagIds,
+      category_id: req.body.category_id, 
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
     });
-    if (updated) {
-        const updatedCategory = await Category.findOne({ where: { id: id } });
-        return res.json({ updatedCategory });
+
+    //if categoryData is empty, then send this error message
+    if (!productData) {
+      res.status(404).json({ message: 'No product found with this id!' });
+      return;
     }
-    throw new Error('Category not found');
-} catch (error) {
-    return res.status(500).send(error.message);
-  }
-}); 
+    res.status(200).json(productData);
+  } catch (err) {
+      res.status(500).json(err);
+    };
+});
 
 
 router.delete('/:id', async (req, res) => {
