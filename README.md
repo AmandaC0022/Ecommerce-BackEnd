@@ -1,4 +1,4 @@
-# ECommerce Backend
+# ECommerce Backend Project 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -15,10 +15,10 @@ Use this application uses purely the backend to create, read, edit and delete pr
 7. [Questions](#questions)
 
 ## Installation  
-You need to first run npm install to download dotenv, express, mysql2, sequelize, and nodemon.  
+You need to first run npm install to download dotenv, express, mysql2, sequelize, and nodemon. The program calls for you to test out the api routes using Insomnia.  
 
 ## Usage  
-After downloading all required packages, then login to MySQL and source schema.sql. Quit MySQL and return to main folder then run node run seeds to seed the database. After that run npm start to start the server. 
+After downloading all required packages, then login to MySQL and source schema.sql. Quit MySQL and return to main folder then run node run seeds to seed the database. After that run npm start to start the server. After the server starts, you are free to open your localhost in Insomnia and test out the different api routes to manipulate the different modules. 
 
 ## Credits 
 Amanda: AmandaC0022
@@ -47,5 +47,7 @@ Please contact me using my GitHub profile: AmandaC0022
 ## GitHub Repo Link: 
 https://github.com/AmandaC0022/Ecommerce-BackEnd
 
-## Walkthrough Video Link: 
+## Walkthrough Video Links: 
+Part 1: https://drive.google.com/file/d/151vSV-hFegmJ6wyqMl1yBv8Re0yslWht/view
+Part 2: https://drive.google.com/file/d/1hR0q6fMRXeANS_M1HV1hdFAze379eoWY/view
 
